@@ -16,17 +16,6 @@ def get_data(ticker):
     return data
 
 
-# def get_data(ticker):
-#     import yfinance as yf
-#     stock = yf.Ticker(ticker)
-#     data = stock.history(period="1y")
-
-#     if data is None or data.empty:
-#         raise ValueError(f"Error: No data found for ticker {ticker}")
-
-#     return data
-
-
 
 # def get_data(ticker):
 #     stock_data = yf.download(ticker, start='2024-01-01')
@@ -46,6 +35,11 @@ def stationary_check(clode_price):
     adf_test = adfuller(clode_price)
     p_value = round(adf_test[1],3)
     return p_value
+
+
+# def get_rolling_mean(close_price):
+#     rolling_price = close_price.rolling(window=7).mean().dropna()
+#     return rolling_price
 
 
 def get_rolling_mean(close_price):
@@ -73,8 +67,8 @@ def fit_model(data,differencing_order):
     model = ARIMA(data, order=(30, differencing_order, 30))
     model_fit = model.fit()
 
-    forcast_steps = 30
-    forcast = model_fit.get_forcast(steps=forcast_steps)
+    forecast_steps = 30
+    forecast = model_fit.get_forecast(steps=forecast_steps)
 
     predictions = forecast.predicted_mean
     return predictions
@@ -95,14 +89,14 @@ def get_scalling(close_price):
     return scaled_data, scaler
 
 
-def get_forcast(original_price, differencing_order):
+def get_forecast(original_price, differencing_order):
     predictions = fit_model(original_price, differencing_order)
     start_date = datetime.now().strftime('%Y-%m-%d')
     end_date = (datetime.now() + timedelta(days=29)).strftime('%Y-%m-%d')
-    forcast_index = pd.date_range(start=start_date, end=end_date, freq='D')
-    forcast_df = pd.DataFrame(predictions, index=forcast_index, columns=['Close'])
+    forecast_index = pd.date_range(start=start_date, end=end_date, freq='D')
+    forecast_df = pd.DataFrame(predictions, index=forecast_index, columns=['Close'])
 
-    return forcast_df
+    return forecast_df
 
 
 def inverse_scaling(scaler, scaled_data):
