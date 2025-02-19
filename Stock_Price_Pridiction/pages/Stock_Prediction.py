@@ -1,8 +1,10 @@
 import streamlit as st
 from pages.utils.model_train import get_data, stationary_check, get_rolling_mean, get_differencing_order, fit_model, evaluate_model, get_scalling, get_forcast
 import pandas as pd
-from numpy import nan
 from pages.utils.plotly_figure import plotly_table, Moving_average_forcast
+
+import numpy as np
+NaN = np.nan
 
 st.set_page_config(
     page_title="Stock Prediction",
