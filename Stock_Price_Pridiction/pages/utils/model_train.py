@@ -35,7 +35,7 @@ def get_data(ticker):
 
 def stationary_check(clode_price):
     adf_test = adfuller(clode_price)
-    p_value = riund(adf_test[1],3)
+    p_value = round(adf_test[1],3)
     return p_value
 
 
