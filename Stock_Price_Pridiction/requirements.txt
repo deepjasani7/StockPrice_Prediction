@@ -7,3 +7,4 @@ python-dateutil
 ta
 setuptools
 scikit-learn
+statsmodels
