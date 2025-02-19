@@ -21,7 +21,14 @@ rmse = 0
 
 st.subheader('Predicting Next 20 days Close Price for: '+ticker)
 
-close_price = get_data(ticker)
+close_price = get_data(ticker)  
+
+if isinstance(close_price, pd.DataFrame):
+    close_price = close_price["Close"]  
+
+if not isinstance(close_price, pd.Series):
+    raise TypeError("Error: close_price must be a Pandas Series before calling rolling().")
+
 rolling_price = get_rolling_mean(close_price)
 
 differencing_order = get_differencing_order(rolling_price)
