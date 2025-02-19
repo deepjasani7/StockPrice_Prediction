@@ -231,13 +231,13 @@ def MACD(dataframe, num_period):
 
 
 
-def Moving_average_forcast(forcast):
+def Moving_average_forcast(forecast):
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=forcast.index[:-30], y=forcast['Close'].iloc[:-30],
+    fig.add_trace(go.Scatter(x=forecast.index[:-30], y=forecast['Close'].iloc[:-30],
         mode='lines', 
         name='Close Price', line=dict(width=2, color = 'black')))
-    fig.add_trace(go.Scatter(x=forcast.index[:-31], y=forcast['Close'].iloc[:-31],
+    fig.add_trace(go.Scatter(x=forecast.index[-31:], y=forecast['Close'].iloc[-31:],
         mode='lines', 
         name='Future Close Price', line=dict(width=2, color = 'red')))
 
