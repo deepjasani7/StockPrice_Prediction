@@ -1,21 +1,30 @@
 import yfinance as yf
 import pandas as pd
 import numpy as np 
+import streamlit as st
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima.model import ARIMA
 from datetime import datetime, timedelta
 
+
+@st.cache_data(ttl=3600)  # Cache for 1 hour
 def get_data(ticker):
-    import yfinance as yf
     stock = yf.Ticker(ticker)
     data = stock.history(period="1y")
-
-    if data is None or data.empty:
-        raise ValueError(f"Error: No data found for ticker {ticker}")
-
     return data
+
+
+# def get_data(ticker):
+#     import yfinance as yf
+#     stock = yf.Ticker(ticker)
+#     data = stock.history(period="1y")
+
+#     if data is None or data.empty:
+#         raise ValueError(f"Error: No data found for ticker {ticker}")
+
+#     return data
 
 
 
