@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 import datetime
 import ta 
 from pages.utils.plotly_figure import plotly_table, candlestick, close_chart, RSI, MACD, Moving_average
-from numpy import NaN
 
 st.set_page_config(
     page_title="Stock Analysis",
