@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from statsmodels.tsa.stattools import adfuller
-from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.arima.model import ARIMA
 from datetime import datetime, timedelta
 
 def get_data(ticker):
