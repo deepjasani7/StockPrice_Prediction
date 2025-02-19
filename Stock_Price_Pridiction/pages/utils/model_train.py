@@ -8,17 +8,29 @@ from statsmodels.tsa.arima_model import ARIMA
 from datetime import datetime, timedelta
 
 def get_data(ticker):
-    stock_data = yf.download(ticker, start='2024-01-01')
-    
-    for attempt in range(5):  # Retry up to 5 times
-        try:
-            return stock_data.info
-        except yf.YFRateLimitError:
-            wait_time = (attempt + 1) * 5  # Exponential backoff (5s, 10s, 15s...)
-            print(f"Rate limit hit. Retrying in {wait_time} seconds...")
-            time.sleep(wait_time)
+    import yfinance as yf
+    stock = yf.Ticker(ticker)
+    data = stock.history(period="1y")
 
-    return None
+    if data is None or data.empty:
+        raise ValueError(f"Error: No data found for ticker {ticker}")
+
+    return data
+
+
+
+# def get_data(ticker):
+#     stock_data = yf.download(ticker, start='2024-01-01')
+    
+#     for attempt in range(5):  # Retry up to 5 times
+#         try:
+#             return stock_data.info
+#         except yf.YFRateLimitError:
+#             wait_time = (attempt + 1) * 5  # Exponential backoff (5s, 10s, 15s...)
+#             print(f"Rate limit hit. Retrying in {wait_time} seconds...")
+#             time.sleep(wait_time)
+
+#     return None
 
 
 def stationary_check(clode_price):
