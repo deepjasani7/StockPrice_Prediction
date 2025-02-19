@@ -28,6 +28,9 @@ def stationary_check(clode_price):
 
 
 def get_rolling_mean(close_price):
+    if not isinstance(close_price, pd.Series):
+        raise TypeError("close_price must be a Pandas Series!")
+
     rolling_price = close_price.rolling(window=7).mean().dropna()
     return rolling_price
 
