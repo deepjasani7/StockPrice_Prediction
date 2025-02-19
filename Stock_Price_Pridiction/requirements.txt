@@ -8,4 +8,4 @@ ta
 setuptools
 scikit-learn
 statsmodels
-numpy==1.21.6
+numpy==1.26.4
