@@ -3,5 +3,5 @@ yfinance
 pandas
 plotly
 numpy
-dateutil
+python-dateutil
 pandas-ta
