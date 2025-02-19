@@ -10,7 +10,7 @@ st.header("Trading Guide App")
 
 st.header("We provide the greatest for you to collect all information prier to investing in stocks.")
 
-st.image("a.png")
+#st.image("a.png")
 
 st.markdown("## We provide the following services:")
 
